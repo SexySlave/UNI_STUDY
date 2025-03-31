@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Список статей</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">📜 Список статей</h1>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Дата</th>
+                    <th>Краткое описание</th>
+                    <th>Ссылка</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.author }}</td>
+                    <td>{{ article.date }}</td>
+                    <td>{{ article.description }}</td>
+                    <td><a href="{{ article.url }}" class="btn btn-sm btn-outline-primary" target="_blank">🔗 Открыть</a></td>
+                    <td>
+                        <a href="{% url 'delete_article' article.id %}" class="btn btn-sm btn-danger">❌ Удалить</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">❌ Нет статей в базе данных</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'index' %}" class="btn btn-secondary">⬅ Назад</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
